@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MerchTracker.Models.MyShirts>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>MyShirts</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="cardHolder">
+
+    @foreach (var item in Model)
+    {
+  
+
+    <div class="cardStyles">
+        <div class="card" style="width: 11rem; height:15rem;">
+            <div class="alignItems">
+                <h5 class="card-title cardText"> @Html.DisplayFor(modelItem => item.ShirtName)</h5>
+
+
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+                </div>
+                
+            </div>
+            
+        </div>
+    }
+    </div>
+ 
+
+
+
+      
+
+        @*<p>
+                <a asp-action="Create">Create New</a>
+            </p>
+
+
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th class="card-title cardText">
+                                    @Html.DisplayNameFor(model => model.ShirtName)
+                                </th>
+                                <th>
+                                        @Html.DisplayNameFor(model => model.ShirtPrice)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Quantity)
+                                    </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShirtName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShirtPrice)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                            </td>
+                                    <td>
+                                        <a asp-action="edit" asp-route-id="@item.id">edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                        <a asp-action="delete" asp-route-id="@item.id">delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>*@
+            

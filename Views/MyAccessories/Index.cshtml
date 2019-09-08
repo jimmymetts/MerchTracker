@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MerchTracker.Models.MyAccessories>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>MyAccessories</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="cardHolder">
+
+    @foreach (var item in Model)
+    {
+
+
+        <div class="cardStyles">
+            <div class="card" style="width: 11rem; height:15rem;">
+                <div class="alignItems">
+                    <h5 class="card-title cardText"> @Html.DisplayFor(modelItem => item.AccessoryName)</h5>
+
+
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>

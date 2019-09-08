@@ -1,0 +1,36 @@
+﻿@model MerchTracker.Models.MyShirts
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MyShirts</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShirtName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShirtName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShirtPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShirtPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
