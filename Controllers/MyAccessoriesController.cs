@@ -7,25 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MerchTracker.Data;
 using MerchTracker.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerchTracker.Controllers
 {
     public class MyAccessoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MyAccessoriesController(ApplicationDbContext context)
+        public MyAccessoriesController(ApplicationDbContext ctx,
+                          UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _userManager = userManager;
+            _context = ctx;
         }
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: MyAccessories
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.MyAccessories.ToListAsync());
         }
 
         // GET: MyAccessories/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +52,7 @@ namespace MerchTracker.Controllers
         }
 
         // GET: MyAccessories/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +61,7 @@ namespace MerchTracker.Controllers
         // POST: MyAccessories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AccessoryName,AccessoryPrice,Quantity")] MyAccessories myAccessories)
@@ -66,6 +76,7 @@ namespace MerchTracker.Controllers
         }
 
         // GET: MyAccessories/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +95,7 @@ namespace MerchTracker.Controllers
         // POST: MyAccessories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AccessoryName,AccessoryPrice,Quantity")] MyAccessories myAccessories)
@@ -117,6 +129,7 @@ namespace MerchTracker.Controllers
         }
 
         // GET: MyAccessories/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +148,7 @@ namespace MerchTracker.Controllers
         }
 
         // POST: MyAccessories/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

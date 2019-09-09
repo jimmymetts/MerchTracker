@@ -101,7 +101,7 @@ namespace MerchTracker.Migrations
 
                     b.Property<string>("CapName");
 
-                    b.Property<string>("CapPrice");
+                    b.Property<double>("CapPrice");
 
                     b.Property<int>("Quantity");
 
@@ -120,7 +120,7 @@ namespace MerchTracker.Migrations
 
                     b.Property<string>("ShirtName");
 
-                    b.Property<string>("ShirtPrice");
+                    b.Property<double>("ShirtPrice");
 
                     b.HasKey("Id");
 

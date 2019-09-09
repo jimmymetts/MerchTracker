@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MerchTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190907212022_init")]
+    [Migration("20190909190236_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,7 +103,7 @@ namespace MerchTracker.Migrations
 
                     b.Property<string>("CapName");
 
-                    b.Property<string>("CapPrice");
+                    b.Property<double>("CapPrice");
 
                     b.Property<int>("Quantity");
 
@@ -122,7 +122,7 @@ namespace MerchTracker.Migrations
 
                     b.Property<string>("ShirtName");
 
-                    b.Property<string>("ShirtPrice");
+                    b.Property<double>("ShirtPrice");
 
                     b.HasKey("Id");
 

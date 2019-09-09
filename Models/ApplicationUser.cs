@@ -17,6 +17,6 @@ namespace MerchTracker.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        //public virtual ICollection<Product> Products { get; set; }
+        //public virtual ICollection<Merch> Merchs { get; set; }
     }
 }
