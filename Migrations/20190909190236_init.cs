@@ -71,7 +71,7 @@ namespace MerchTracker.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CapName = table.Column<string>(nullable: true),
-                    CapPrice = table.Column<string>(nullable: true),
+                    CapPrice = table.Column<double>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -86,7 +86,7 @@ namespace MerchTracker.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ShirtName = table.Column<string>(nullable: true),
-                    ShirtPrice = table.Column<string>(nullable: true),
+                    ShirtPrice = table.Column<double>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

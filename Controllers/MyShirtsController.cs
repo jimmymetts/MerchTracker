@@ -7,24 +7,45 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MerchTracker.Data;
 using MerchTracker.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerchTracker.Controllers
 {
+
     public class MyShirtsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MyShirtsController(ApplicationDbContext context)
+        public MyShirtsController(ApplicationDbContext context,
+                          UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
+        [Authorize]
         // GET: MyShirts
         public async Task<IActionResult> Index()
         {
+            //var user = await GetUserAsync();
+            //var applicationDbContext = _context.MyShirts
+            //    .Where(p => p.UserId == user.Id)
+            //    .Include(p => p.User);
+            //return View(await applicationDbContext.ToListAsync());
             return View(await _context.MyShirts.ToListAsync());
         }
 
+        private Task GetUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }
+
+
+
+        [Authorize]
         // GET: MyShirts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,6 +64,7 @@ namespace MerchTracker.Controllers
             return View(myShirts);
         }
 
+        [Authorize]
         // GET: MyShirts/Create
         public IActionResult Create()
         {
@@ -56,6 +78,7 @@ namespace MerchTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ShirtName,ShirtPrice,Quantity")] MyShirts myShirts)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(myShirts);
@@ -63,8 +86,18 @@ namespace MerchTracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(myShirts);
+
+            //if (ModelState.IsValid)
+            //{
+            //    MyShirts.UserId = User.Id;
+            //    _context.Add(myShirts);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View();
         }
 
+        [Authorize]
         // GET: MyShirts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,6 +117,7 @@ namespace MerchTracker.Controllers
         // POST: MyShirts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ShirtName,ShirtPrice,Quantity")] MyShirts myShirts)
@@ -117,6 +151,7 @@ namespace MerchTracker.Controllers
         }
 
         // GET: MyShirts/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +170,7 @@ namespace MerchTracker.Controllers
         }
 
         // POST: MyShirts/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
